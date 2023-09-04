@@ -1,11 +1,15 @@
 package main
 
-import "github.com/alewkinr/example-google-wire/internal"
+import (
+	"fmt"
+	"os"
+)
 
 func main() {
-	message := internal.NewMessage()
-	greeter := internal.NewGreeter(message)
-	event := internal.NewEvent(greeter)
-
-	event.Start()
+	e, err := InitializeEvent()
+	if err != nil {
+		fmt.Printf("failed to create event: %s\n", err)
+		os.Exit(2)
+	}
+	e.Start()
 }
